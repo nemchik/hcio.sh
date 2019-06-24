@@ -5,10 +5,10 @@ IFS=$'\n\t'
 readonly ARGS=("$@")
 
 main() {
-    local HC_ID="${1:-}"
+    local HC_ID=${1:-}
     shift
     local HC_ARGS=("${@:-}")
-    if [[ -z ${HC_ID} ]] || [[ -z ${HC_ARGS} ]]; then
+    if [[ -z ${HC_ID} ]] || [[ -z ${HC_ARGS[*]} ]]; then
         exit 1
     fi
 
@@ -20,4 +20,3 @@ main() {
     (curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}" > /dev/null || true)
 }
 main "${ARGS[@]:-}"
-
