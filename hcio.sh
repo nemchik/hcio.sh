@@ -12,11 +12,11 @@ main() {
         exit 1
     fi
 
-    (curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}"/start > /dev/null || true)
+    (curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}"/start || true)
     eval "${HC_ARGS[@]:-}" || (
-        curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}"/fail > /dev/null || true
+        curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}"/fail || true
         exit 1
     )
-    (curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}" > /dev/null || true)
+    (curl -fsS --retry 3 https://hc-ping.com/"${HC_ID}" || true)
 }
 main "${ARGS[@]:-}"
